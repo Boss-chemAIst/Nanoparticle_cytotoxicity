@@ -16,8 +16,8 @@ def make_train_test(bins_interval=[0, 100],
     # loads numeric and categorical part of the final dataset
     current_path = os.getcwd()
     upper_directory = '\\'.join(current_path.split('\\')[0:-1])
-    db_numeric = pd.read_csv(upper_directory + '\\databases\\Final\\numerical.csv')
-    db_categorical = pd.read_csv(upper_directory + '\\databases\\Final\\categorical.csv')
+    db_numeric = pd.read_csv('C:/projects/laboratory/Nanoparticle_cytotoxicity/databases/Final/numerical.csv')
+    db_categorical = pd.read_csv('C:/projects/laboratory/Nanoparticle_cytotoxicity/databases/Final/categorical.csv')
 
     # splits the data on predictors and value to be predicted
     y_final = db_numeric.loc[:, db_numeric.columns == 'viability (%)']
@@ -43,10 +43,6 @@ def make_train_test(bins_interval=[0, 100],
 
     # forms dataframe with predictors (categorical + numeric + material_column)
     x = pd.concat([x_cat_plus_mat, x_numeric], axis=1)
-
-    # final predictors
-    x = generate_descriptors(categorical_dataframe=db_categorical,
-                             dataframe_to_be_concat_with=x)
 
     # drops some empty values (if present)
     x_y = pd.concat([x, y_final], axis=1)
